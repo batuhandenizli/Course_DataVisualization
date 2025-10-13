@@ -1,0 +1,77 @@
+---
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+title: 'Assignment 2'
+author: "Batuhan Denizli"
+date: "2025-10-13"
+output: pdf_document
+---
+
+```{r init, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+# Installing necessary package(s)
+install.packages("DALEX") # to access the Titanic dataset
+install.packages("dplyr") # to use the pipe operator
+install.packages("ggplot2")
+library(DALEX)
+library(dplyr)
+library(ggplot2)
+```
+
+
+# Dataset
+
+The `BreastCancer` dataset contains cytological measurements of breast tissue 
+samples, used to classify tumors as benign or malignant. It includes numerical 
+features describing cell characteristics derived from microscopic examination.
+
+To load the dataset to your environment, just run the code below:
+
+```{r message=FALSE, warning=FALSE}
+install.packages("mlbench")   
+library(mlbench)
+data("BreastCancer")          
+BreastCancer$Cl.thickness <- as.numeric(BreastCancer$Cl.thickness)
+```
+# Drawing a plot for distribution
+
+1. Please draw a plot to visualize the distribution 
+of tissue thickness (`Cl.thickness`) of the patients according to `Class` 
+indicating whether the tumor in the breast tissue is benign or malignant.
+(40 pts).
+
+```{r}
+ggplot(BreastCancer, aes(x =Cl.thickness )) + 
+  geom_histogram()
+```
+
+
+2. Please solve the problems in the plot and make it better by adding 
+some information (30 pts).
+
+```{r}
+ggplot(BreastCancer, aes(x =Cl.thickness )) + 
+  geom_histogram(color = "white", fill = "black") +
+  labs(x = "Cl.thickness", 
+       y = "Frequency",
+       title = "BREASTCANCER",
+       subtitle = "Histogram") + 
+  lims(x = c(0, 20), y = c(0, 100))
+```
+
+
+3. Interpret the plot (30 pts). 
+
+-The highest was close to 150.
+-the minimum is below 50.
+-This histogram is not symetric.
